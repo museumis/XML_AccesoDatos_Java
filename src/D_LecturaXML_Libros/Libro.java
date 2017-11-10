@@ -1,4 +1,4 @@
-package B_EscrituraXml_Libros;
+package D_LecturaXML_Libros;
 
 import java.io.File;
 import java.io.FileInputStream;

@@ -1,4 +1,4 @@
-package A_EscrituraXML;
+package C_LecturaXML_Contactos;
 
 import java.util.ArrayList;
 
@@ -36,8 +36,8 @@ public class Main {
 	 * Metodo para gestionar el programa
 	 */
 	public static void gestionPrograma() {
-		String[] menuPrincipal = { " - Menú Principal - ", " 1. Añadir contactos automaticamente", " 2.Leer Contactos",
-				" 3.Escribir XML", " 4.Salir." };
+		String[] menuPrincipal = { " - Menú Principal - ", " 1. Añadir contactos automaticamente", " 2. Leer Contactos",
+				" 3. Escribir XML"," 4. Leer Fichero XML", " 5.Salir." };
 
 		switch (Utilidades.generarMenu(menuPrincipal)) {
 		case 1: {
@@ -59,15 +59,21 @@ public class Main {
 			gestionPrograma();
 			break;
 		}
-		case 4: {
+		case 4:{
+			Utilidades.leerXML();
+			gestionPrograma();
+			break;
+		}
+		case 5: {
 			System.out.println("Saudos.");
+			break;
 		}
 		}
 
 	}// Fin de gestion
 
 	public static void main(String[] args) {
-		System.out.println(" - Crear ficheros en XML - ");
+		System.out.println(" - Crear  y Leer ficheros en XML - ");
 		gestionPrograma();
 	}
 

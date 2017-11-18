@@ -43,21 +43,22 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 /**
  * 
- * @author Ismael Martín
+ * @author Ismael Martín Ramírez
+ * https://museumis.github.io/Si/
  *
- *         Clase que lee y escribe ficheros XML mediante DOM, STAX y
- *         serialización de objetos.
+ * Clase que lee y escribe ficheros XML mediante DOM, STAX y serialización de
+ * objetos.
  * 
- *         Nota: Esta clase esta realizada apartir de varios ejemplos,retócala a
- *         tu gusto. Nota: Los comentario que inician con *** deberán ser
- *         implementados para utilizar clase. Nota: Se indicará como 'Object'
- *         los atributos que necesitan de un objeto para ejecutar,cambialo al
- *         necesario. Nota: El objeto que implemente esta clase debe tener el
- *         método toString() implementado. Nota:Para utilizar los métodos de
- *         serialización y deserialización debe importarse un jar
- *         Project/properties/Java Build Path/add External
- *         Jar/xstream-1.4.8(XML_FULL.Librerias)(https://x-stream.github.io/download.html
- *         ("Binary distribution"))
+ * Nota: Esta clase esta realizada apartir de varios ejemplos,retócala a tu
+ * gusto. Nota: Los comentario que inician con *** deberán ser implementados
+ * para utilizar clase. 
+ * Nota: Se indicará como 'Object' los atributos que
+ * necesitan de un objeto para ejecutar,cambialo al necesario. Nota: El objeto
+ * que implemente esta clase debe tener el método toString() implementado.
+ * Nota:Para utilizar los métodos de serialización y deserialización debe
+ * importarse un jar Project/properties/Java Build Path/add External
+ * Jar/xstream-1.4.8(XML_FULL.Librerias)(https://x-stream.github.io/download.html
+ * ("Binary distribution"))
  * 
  */
 public class XmlFull {
@@ -336,8 +337,7 @@ public class XmlFull {
 	/**
 	 * Metodo que escribe un fichero XML mediante DOM con los objetos del fichero
 	 * 
-	 * @param litado
-	 *            -> listado de libros
+	 * @param litado -> listado de libros
 	 */
 	public static void escribirXML_DOM(ArrayList<Object> litado) {
 		try {
@@ -640,8 +640,7 @@ public class XmlFull {
 	/**
 	 * Metodo para generar menus
 	 * 
-	 * @param opciones
-	 *            del menu
+	 * @param opciones del menu
 	 * @return respuesta
 	 */
 	public static int generarMenu(String[] opciones) {

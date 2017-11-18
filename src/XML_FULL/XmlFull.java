@@ -53,7 +53,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
  *         implementados para utilizar clase. Nota: Se indicará como 'Object'
  *         los atributos que necesitan de un objeto para ejecutar,cambialo al
  *         necesario. Nota: El objeto que implemente esta clase debe tener el
- *         método toString() implementado.
+ *         método toString() implementado. Nota:Para utilizar los métodos de
+ *         serialización y deserialización debe importarse un jar
+ *         Project/properties/Java Build Path/add External
+ *         Jar/xstream-1.4.8(XML_FULL.Librerias)(https://x-stream.github.io/download.html
+ *         ("Binary distribution"))
  * 
  */
 public class XmlFull {
@@ -112,6 +116,9 @@ public class XmlFull {
 
 	}// Fin de escribir XML Serialización
 
+	/**
+	 * Método para deseliarizar un XML y crear un objeto
+	 */
 	public static void leerXML_Deserializacion() {
 		// Preparativos para la lectura
 		XStream xs = new XStream(new DomDriver("UTF-8"));
@@ -136,9 +143,9 @@ public class XmlFull {
 		// *** Libro l = (Libro)i.next();
 		// *** System.out.println("\tLibro: "+l.getTitulo() + " \t Autor:
 		// "+l.getAutor());
-	}
+		// *** }
 
-	// ***}
+	}// Fin de deserializar
 
 	/**
 	 * Leer fichero XML mediate STAX

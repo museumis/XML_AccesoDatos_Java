@@ -10,17 +10,17 @@ import java.util.ArrayList;
  */
 public class ListadoObjetos {
 
-	ArrayList<Object> listado;
+	ArrayList<Blog> listado;
 
 	public ListadoObjetos() {
 		listado = new ArrayList<>();
 	}
 
-	public void addLibro(Object l) {
+	public void addLibro(Blog l) {
 		listado.add(l);
 	}
 
-	public ArrayList<Object> getListado() {
+	public ArrayList<Blog> getListado() {
 		return listado;
 	}
 }

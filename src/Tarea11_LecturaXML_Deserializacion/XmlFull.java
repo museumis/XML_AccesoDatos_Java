@@ -112,33 +112,36 @@ public class XmlFull {
 
 	}// Fin de escribir XML Serialización
 
-	public static void leerXML_Deserializacion() {
+	public static void leerXML_Deserializacion(String url) {
 		// Preparativos para la lectura
 		XStream xs = new XStream(new DomDriver("UTF-8"));
 		// Raiz
-		xs.alias("Biblioteca", ListadoObjetos.class);
+		xs.alias("blog", Blog.class);
 		// Nodos
-		// ***xs.alias("libro", Libro.class);
-		xs.addImplicitCollection(ListadoObjetos.class, "listado");
-		ListadoObjetos libros = null;
+		xs.alias("autor", Blog.class);
+		xs.alias("entrada", Entrada.class);
+	
+		xs.addImplicitCollection(Blog.class, "entradas");
+		//xs.addImplicitCollection(ListadoObjetos.class, "listado");
+		
+		ListadoObjetos blog = null;
 		// Comienzo de la lectura
 		try {
-			libros = (ListadoObjetos) xs.fromXML(new FileInputStream(new File(urlXML)));
+			blog = (ListadoObjetos) xs.fromXML(new FileInputStream(new File(url)));
 		} catch (FileNotFoundException e) {
 			System.out.println("No se encontró el fichero");
 			e.printStackTrace();
 		}
 		// Obtener listado de los objetos del xml
-		// ***ArrayList<Libro>listado = libros.getListado();
+		ArrayList<Blog>listado = blog.getListado();
 		// Mostrar
-		// ***Iterator<Libro>i=listado.listIterator();
-		// ***while(i.hasNext()) {
-		// *** Libro l = (Libro)i.next();
-		// *** System.out.println("\tLibro: "+l.getTitulo() + " \t Autor:
-		// "+l.getAutor());
+		Iterator<Blog>i=listado.listIterator();
+		while(i.hasNext()) {
+		 Blog b = (Blog)i.next();
+		 System.out.println("\t: "+b);
 	}
 
-	// ***}
+	}
 
 	/**
 	 * Leer fichero XML mediate STAX

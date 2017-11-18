@@ -1,9 +1,11 @@
-package Tarea08_LeecturaXML_STAX_Libros;
+package Tarea08_LecturaXML_STAX_Libros;
 
+import java.awt.List;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -13,8 +15,10 @@ import java.util.Scanner;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
 import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
@@ -31,17 +35,70 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.stream.XMLStreamConstants;
+
 public class Utilidades {
 
-	private static final String urlObj = "src\\Tarea07_EscrituraXML_STAX_DesdeFicheroSerializado\\Agenda.obj";
-	private static final String urlXML = "src\\Tarea07_EscrituraXML_STAX_DesdeFicheroSerializado\\Agenda.xml";
+	private static final String urlObj = "src\\Tarea08_LecturaXML_STAX_Libros\\Catalogo.obj";
+	private static final String urlXML = "src\\Tarea08_LecturaXML_STAX_Libros\\Catalogo.xml";
 
 	/**
 	 * Leer fichero XML mediate STAX
 	 */
 
 	public static void leerXML_Stax() {
-		
+		int event = 0;
+		try {
+			// preparativos
+			ArrayList<Libro> listado = new ArrayList<>();
+			Libro libro = null;
+			XMLInputFactory f = XMLInputFactory.newInstance();
+			XMLStreamReader r = f.createXMLStreamReader(new FileReader(urlXML));
+
+			// Lectura
+			while (r.hasNext()) {
+				event = r.next();
+
+				if (event == XMLStreamConstants.START_ELEMENT) {
+					String nodo = r.getLocalName();
+					switch (nodo) {
+					case "libro": {
+						libro = new Libro();
+						libro.setIsbn(r.getAttributeLocalName(0));
+						break;
+					}
+					case "titulo": {
+						libro.setTitulo(r.getElementText());
+						break;
+					}
+					
+					case "autor": {
+						libro.anadirAutor(r.getElementText());
+						break;
+					}
+					case "editorial": {
+						libro.setEditorial(r.getElementText());
+						break;
+					}
+					}
+
+				}
+				if ((event == XMLStreamConstants.END_ELEMENT) && (r.getLocalName() == "libro")) {
+					listado.add(libro);
+				}
+			} // Fin while
+
+			// Mostrar
+			for (int i = 0; i < listado.size(); i++) {
+				System.out.println(listado.get(i));
+			}
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (XMLStreamException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}// Fin de leer xmlStax
 
 	/**
@@ -120,7 +177,7 @@ public class Utilidades {
 
 			// <Catalogo>
 			bufferEscritura.writeStartDocument();
-			bufferEscritura.writeStartElement("Catálogo");
+			bufferEscritura.writeStartElement("catalogo");
 			// <libro>
 			bufferEscritura.writeStartElement("libro");
 			bufferEscritura.writeAttribute("isbn", "0001");
@@ -129,15 +186,22 @@ public class Utilidades {
 			bufferEscritura.writeCharacters("Acceso a Datos");
 			bufferEscritura.writeEndElement();
 			// </titulo>
+			// <autores>
+			bufferEscritura.writeStartElement("autores");
 			// <autor>
-			System.out.println(" - Introduce los autores de la celestina.\n");
-			do {
-				bufferEscritura.writeStartElement("autor");
-				bufferEscritura.writeCharacters(pedirTexto("Autor: "));
-				bufferEscritura.writeEndElement();
-			} while (pedirTexto("\n - ¿Desea añadir más autores?[si/intro]: ").equals("si"));
+			bufferEscritura.writeStartElement("autor");
+			bufferEscritura.writeCharacters("Anónimo");
+			bufferEscritura.writeEndElement();
 			// </autor>
-			// <Editorial>
+
+			// <autor>
+			bufferEscritura.writeStartElement("autor");
+			bufferEscritura.writeCharacters("Bufer Printer");
+			bufferEscritura.writeEndElement();
+			// </autor>
+			bufferEscritura.writeEndElement();
+			// </autores>
+			// <editorial>
 			bufferEscritura.writeStartElement("editorial");
 			bufferEscritura.writeCharacters("tragicomedia");
 			bufferEscritura.writeEndElement();
@@ -166,7 +230,7 @@ public class Utilidades {
 	 * @param litado
 	 *            -> listado de libros
 	 */
-	public static void escribirXML(ArrayList<Object> litado) {
+	public static void escribirXML(ArrayList<Libro> litado) {
 		try {
 			// Preparativos
 			DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
@@ -181,13 +245,13 @@ public class Utilidades {
 			for (int j = 0; j < litado.size(); j++) {
 				// <libro>
 				Element nodo = documento.createElement("libro");
-				// nodo.setAttribute("isbn", ((Object) litado.get(j)).getIsbn());
+				nodo.setAttribute("isbn", (litado.get(j)).getIsbn());
 				documento.getDocumentElement().appendChild(nodo);
 
 				// <nombreHijo>contenidoHijo
-				// crearHijosNodo("titulo", litado.get(j).getTitulo(), nodo, documento);
+				crearHijosNodo("titulo", litado.get(j).getTitulo(), nodo, documento);
 				// crearHijosNodo("autor", litado.get(j).getAutor(), nodo, documento);
-				// crearHijosNodo("editorial", litado.get(j).getEditorial(), nodo, documento);
+				crearHijosNodo("editorial", litado.get(j).getEditorial(), nodo, documento);
 				// </nombreHijo>
 				// </libro>
 			}
@@ -369,7 +433,7 @@ public class Utilidades {
 	/**
 	 * Escribir fichero serializado con los datos del objeto
 	 */
-	public static void escribirEnFichero(Object c) {
+	public static void escribirEnFichero(Libro c) {
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 		File fichero = new File(urlObj);

@@ -1,4 +1,4 @@
-package Tarea02_EscrituraXml_Libros;
+package Tarea10_EscrituraLectura_XML_Serializacion;
 
 import java.io.Serializable;
 
@@ -13,10 +13,8 @@ public class Libro implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -4302725085116527753L;
-	private String isbn;
 	private String titulo;
 	private String autor;
-	private String editorial;
 
 	// Contructor
 	public Libro() {
@@ -24,11 +22,9 @@ public class Libro implements Serializable{
 	}
 
 	// Constructor completo
-	public Libro(String isbn, String titulo, String autor, String editorial) {
-		this.isbn = isbn;
+	public Libro(String titulo, String autor) {
 		this.titulo = titulo;
 		this.autor = autor;
-		this.editorial = editorial;
 	}
 	
 	/*
@@ -37,23 +33,13 @@ public class Libro implements Serializable{
 	@Override
 	public String toString() {
 		String cadena = "\n-----------\n";
-		cadena += "Nombre: " + this.isbn;
 		cadena += "\nApellido: " + this.titulo;
 		cadena += "\nEmail: " + this.autor;
-		cadena += "\nTelefono: " + this.editorial;
 
 		return cadena;
 	}
 
 	//Get and Set
-	public String getIsbn() {
-		return isbn;
-	}
-
-	public void setIsbn(String isbn) {
-		this.isbn = isbn;
-	}
-
 	public String getTitulo() {
 		return titulo;
 	}
@@ -69,14 +55,4 @@ public class Libro implements Serializable{
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
-
-	public String getEditorial() {
-		return editorial;
-	}
-
-	public void setEditorial(String editorial) {
-		this.editorial = editorial;
-	}
-	
-	
 }

@@ -1,0 +1,14 @@
+<Biblioteca>
+  <libro>
+    <titulo>Génesis</titulo>
+    <autor>Dios</autor>
+  </libro>
+  <libro>
+    <titulo>Éxodo</titulo>
+    <autor>Moises</autor>
+  </libro>
+  <libro>
+    <titulo>La biblia</titulo>
+    <autor>Jesus</autor>
+  </libro>
+</Biblioteca>

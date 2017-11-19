@@ -119,26 +119,25 @@ public class XmlFull {
 		xs.alias("blog", Blog.class);
 		// Nodos
 		xs.alias("autor", Blog.class);
-		xs.alias("entrada", Entrada.class);
-	
+		xs.alias("entrada", Entrada.class);	
 		xs.addImplicitCollection(Blog.class, "entradas");
-		//xs.addImplicitCollection(ListadoObjetos.class, "listado");
 		
-		ListadoObjetos blog = null;
+		Blog blog = null;
 		// Comienzo de la lectura
 		try {
-			blog = (ListadoObjetos) xs.fromXML(new FileInputStream(new File(url)));
+			blog = (Blog) xs.fromXML(new FileInputStream(new File(url)));
 		} catch (FileNotFoundException e) {
 			System.out.println("No se encontró el fichero");
 			e.printStackTrace();
 		}
-		// Obtener listado de los objetos del xml
-		ArrayList<Blog>listado = blog.getListado();
+		// Obtener listado de los objetos del objeto
+		ArrayList<Entrada>listado = blog.getEntradas();
 		// Mostrar
-		Iterator<Blog>i=listado.listIterator();
+		System.out.println(blog.getAutor());
+		Iterator<Entrada>i=listado.listIterator();
 		while(i.hasNext()) {
-		 Blog b = (Blog)i.next();
-		 System.out.println("\t: "+b);
+		 Entrada e = (Entrada)i.next();
+		 System.out.println(e);
 	}
 
 	}

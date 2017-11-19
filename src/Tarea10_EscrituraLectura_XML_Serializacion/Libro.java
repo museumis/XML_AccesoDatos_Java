@@ -33,8 +33,8 @@ public class Libro implements Serializable{
 	@Override
 	public String toString() {
 		String cadena = "\n-----------\n";
-		cadena += "\nApellido: " + this.titulo;
-		cadena += "\nEmail: " + this.autor;
+		cadena += "\nTitulo: " + this.titulo;
+		cadena += "\nAutor: " + this.autor;
 
 		return cadena;
 	}

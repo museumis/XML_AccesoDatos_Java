@@ -30,7 +30,7 @@ public class Entrada implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return this.titulo + " -> " + this.descripcion;
+		return this.titulo + " /n " + this.descripcion;
 	}
 
 }
